@@ -1,0 +1,9 @@
+* 3 EXISTS
+* 0 RECENT
+* OK [UNSEEN 1]
+* OK [UIDVALIDITY 3] UIDs valid 
+* OK [UIDNEXT 4] Predicted next UID 
+* OK [HIGHESTMODSEQ 1727014053405001100]
+* FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+* OK [PERMANENTFLAGS (\* \Answered \Flagged \Deleted \Seen \Draft)] Permanent flags
+a2 OK [READ-WRITE] SELECT completed

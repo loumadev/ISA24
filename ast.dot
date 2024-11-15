@@ -1,0 +1,553 @@
+digraph G {
+	graph [
+		labelloc="t"
+		fontname="Helvetica,Arial,sans-serif"
+	]
+	node [
+		fontname="Helvetica,Arial,sans-serif"
+		shape=record
+		style=filled
+		fillcolor=gray95
+	]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	ConfigFileReader [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>ConfigFileReader</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ entries: std::map&lt;std::string, std::string&gt;</td> </tr>
+					<tr> <td align="left" >+ fileStream: FileStream*</td> </tr>
+					<tr> <td align="left" >+ bufferedReader: BufferedReader*</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(path: char*): ConfigFileReader</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ parse(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	Utils [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>Utils</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No fields </td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" ><u>+ hashString(hash: uint8_t, str: char*, length: size_t): void</u></td> </tr>
+					<tr> <td align="left" ><u>+ stringifyBuffer(buffer: uint8_t*, length: size_t): std::string</u></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPClient [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPClient</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ socket: Socket*</td> </tr>
+					<tr> <td align="left" >+ parser: IMAPParser*</td> </tr>
+					<tr> <td align="left" >+ tag: int</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(socket: Socket*): IMAPClient</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ login(username: char*, password: char*): IMAPLoginResponse*</td> </tr>
+					<tr> <td align="left" >+ selectMailbox(mailbox: char*): IMAPSelectResponse*</td> </tr>
+					<tr> <td align="left" >+ search(criteria: char*): IMAPSearchResponse*</td> </tr>
+					<tr> <td align="left" >- fetch(query: FetchQuery*): IMAPFetchResponse*</td> </tr>
+					<tr> <td align="left" >- logout(): IMAPLogoutResponse*</td> </tr>
+					<tr> <td align="left" ><u>- escapeString(str: char*): std::string</u></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPParser [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPParser</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ socket: Socket*</td> </tr>
+					<tr> <td align="left" >+ reader: BufferedReader*</td> </tr>
+					<tr> <td align="left" >+ responses: std::map&lt;uint32_t, IMAPRawResponse*&gt;</td> </tr>
+					<tr> <td align="left" >+ hasConsumedHello: bool</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(socket: Socket*): IMAPParser</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ waitForResponse(tag: uint32_t): IMAPRawResponse*</td> </tr>
+					<tr> <td align="left" >+ handleResponse(): IMAPRawResponse*</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	SafeStringView [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>SafeStringView</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ data: std::string*</td> </tr>
+					<tr> <td align="left" >+ start: size_t</td> </tr>
+					<tr> <td align="left" >+ end: size_t</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(): SafeStringView</td> </tr>
+					<tr> <td align="left" >+ <i>constructor</i>(data: std::string*, start: size_t, end: size_t): SafeStringView</td> </tr>
+					<tr> <td align="left" >+ length(): size_t</td> </tr>
+					<tr> <td align="left" >+ toView(): std::string_view</td> </tr>
+					<tr> <td align="left" >+ toString(): std::string</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPResponseBodyLine [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPResponseBodyLine</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ type: Type</td> </tr>
+					<tr> <td align="left" >+ content: SafeStringView</td> </tr>
+					<tr> <td align="left" >+ octetStream: std::optional&lt;SafeStringView&gt;</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(content: SafeStringView): IMAPResponseBodyLine</td> </tr>
+					<tr> <td align="left" >+ <i>constructor</i>(content: SafeStringView, octetStream: SafeStringView): IMAPResponseBodyLine</td> </tr>
+					<tr> <td align="left" >- resolveType(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPRawResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPRawResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ tag: uint32_t</td> </tr>
+					<tr> <td align="left" >+ status: Status</td> </tr>
+					<tr> <td align="left" >+ message: SafeStringView</td> </tr>
+					<tr> <td align="left" >+ bodyLines: std::vector&lt;IMAPResponseBodyLine&gt;</td> </tr>
+					<tr> <td align="left" >+ raw: std::string*</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(): IMAPRawResponse</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ isOk(): bool</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ response: IMAPRawResponse*</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(response: IMAPRawResponse*): IMAPResponse</td> </tr>
+					<tr> <td align="left" >+ isOk(): bool</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPLoginResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPLoginResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No fields </td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No methods </td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPLogoutResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPLogoutResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No fields </td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No methods </td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPSelectResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPSelectResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ exists: uint32_t</td> </tr>
+					<tr> <td align="left" >+ recent: uint32_t</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(response: IMAPRawResponse*): IMAPSelectResponse</td> </tr>
+					<tr> <td align="left" >- parseBody(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPSearchResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPSearchResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ messageNumbers: std::vector&lt;uint32_t&gt;</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(response: IMAPRawResponse*): IMAPSearchResponse</td> </tr>
+					<tr> <td align="left" >- parseBody(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPMessage [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPMessage</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ id: uint32_t</td> </tr>
+					<tr> <td align="left" >+ content: SafeStringView</td> </tr>
+					<tr> <td align="left" >+ headers: std::map&lt;std::string, std::string&gt;</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(): IMAPMessage</td> </tr>
+					<tr> <td align="left" >+ parseHeaders(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	IMAPFetchResponse [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>IMAPFetchResponse</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ messages: std::vector&lt;IMAPMessage&gt;</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(response: IMAPRawResponse*): IMAPFetchResponse</td> </tr>
+					<tr> <td align="left" >- parseBody(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	ClientSettings [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>ClientSettings</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ host: char*</td> </tr>
+					<tr> <td align="left" >+ port: uint32_t</td> </tr>
+					<tr> <td align="left" >+ tls: bool</td> </tr>
+					<tr> <td align="left" >+ certFile: char*</td> </tr>
+					<tr> <td align="left" >+ certDir: char*</td> </tr>
+					<tr> <td align="left" >+ mailbox: char*</td> </tr>
+					<tr> <td align="left" >+ headersOnly: bool</td> </tr>
+					<tr> <td align="left" >+ recentOnly: bool</td> </tr>
+					<tr> <td align="left" >+ authFile: char*</td> </tr>
+					<tr> <td align="left" >+ outDir: char*</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ validate(): bool</td> </tr>
+					<tr> <td align="left" >+ formatDownloadCount(count: size_t): std::string</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	AddressInfo [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>AddressInfo</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >- address: char*</td> </tr>
+					<tr> <td align="left" >- port: int</td> </tr>
+					<tr> <td align="left" >- family: Family</td> </tr>
+					<tr> <td align="left" >- size: size_t</td> </tr>
+					<tr> <td align="left" >- _address: struct sockaddr_in</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(): AddressInfo</td> </tr>
+					<tr> <td align="left" >+ <i>constructor</i>(port: int): AddressInfo</td> </tr>
+					<tr> <td align="left" >+ <i>constructor</i>(address: char*, port: int, family: Family): AddressInfo</td> </tr>
+					<tr> <td align="left" >+ <i>constructor</i>(sockaddr_in: struct, size: size_t): AddressInfo</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ setAddressInfo(address: char*, port: int, family: Family): void</td> </tr>
+					<tr> <td align="left" >+ setAddressInfo(sockaddr_in: struct, size: size_t): void</td> </tr>
+					<tr> <td align="left" >+ setAddressInfo(address: in_addr_t, port: int): void</td> </tr>
+					<tr> <td align="left" >+ setAddressInfo(port: int): void</td> </tr>
+					<tr> <td align="left" >+ getAddress(): const char*</td> </tr>
+					<tr> <td align="left" >+ getPort(): int</td> </tr>
+					<tr> <td align="left" >+ getFamily(): Family</td> </tr>
+					<tr> <td align="left" >+ getSize(): size_t</td> </tr>
+					<tr> <td align="left" >+ getSocketAddress(): struct sockaddr*</td> </tr>
+					<tr> <td align="left" ><u>+ resolve(hostname: char*, port: int, family: Family, socketType: int): AddressInfo*</u></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	Socket [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>«abstract» Socket</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No fields </td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" ><i>+ connect(hostname: char*, port: int): void</i></td> </tr>
+					<tr> <td align="left" ><i>+ close(): void</i></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	TCPSocket [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>TCPSocket</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ addressInfo: AddressInfo*</td> </tr>
+					<tr> <td align="left" >+ fd: int</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(): TCPSocket</td> </tr>
+					<tr> <td align="left" >+ connect(hostname: char*, port: int): void</td> </tr>
+					<tr> <td align="left" >+ write(buffer: char*, size: size_t): void</td> </tr>
+					<tr> <td align="left" >+ read(buffer: char*, size: size_t): size_t</td> </tr>
+					<tr> <td align="left" >+ close(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	TLSSocket [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>TLSSocket</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ ctx: SSL_CTX*</td> </tr>
+					<tr> <td align="left" >+ ssl: SSL*</td> </tr>
+					<tr> <td align="left" >+ tcpSocket: TCPSocket*</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(): TLSSocket</td> </tr>
+					<tr> <td align="left" >+ connect(hostname: char*, port: int): void</td> </tr>
+					<tr> <td align="left" >+ write(buffer: char*, size: size_t): void</td> </tr>
+					<tr> <td align="left" >+ read(buffer: char*, size: size_t): size_t</td> </tr>
+					<tr> <td align="left" >+ close(): void</td> </tr>
+					<tr> <td align="left" >+ setCertificateFile(certFile: char*): void</td> </tr>
+					<tr> <td align="left" >+ setCertificateDirectory(certDir: char*): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	BufferedReader [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>BufferedReader</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >- stream: Readable*</td> </tr>
+					<tr> <td align="left" >- buffer: char*</td> </tr>
+					<tr> <td align="left" >- capacity: size_t</td> </tr>
+					<tr> <td align="left" >- size: size_t</td> </tr>
+					<tr> <td align="left" >- position: size_t</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(stream: Readable*, capacity: size_t): BufferedReader</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ readByte(): int</td> </tr>
+					<tr> <td align="left" >+ readBytes(buffer: char*, size: size_t): size_t</td> </tr>
+					<tr> <td align="left" >+ skipBytes(size: size_t): size_t</td> </tr>
+					<tr> <td align="left" >+ readLine(buffer: char*, size: size_t): ssize_t</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	FileStream [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>FileStream</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >- file: FILE*</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(path: char*, mode: char*): FileStream</td> </tr>
+					<tr> <td align="left" >+ <i>constructor</i>(file: FILE*): FileStream</td> </tr>
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" >+ read(buffer: char*, size: size_t): size_t</td> </tr>
+					<tr> <td align="left" >+ write(buffer: char*, size: size_t): void</td> </tr>
+					<tr> <td align="left" >+ close(): void</td> </tr>
+					<tr> <td align="left" ><u>+ open(path: char*, mode: char*): FileStream</u></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	Readable [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>«abstract» Readable</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No fields </td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" ><i>+ read(buffer: char*, size: size_t): size_t</i></td> </tr>
+					<tr> <td align="left" ><i>+ close(): void</i></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	ReadableString [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>ReadableString</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >- data: char*</td> </tr>
+					<tr> <td align="left" >- size: size_t</td> </tr>
+					<tr> <td align="left" >- position: size_t</td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>constructor</i>(data: char*, size: size_t): ReadableString</td> </tr>
+					<tr> <td align="left" >+ readByte(): int</td> </tr>
+					<tr> <td align="left" >+ read(buffer: char*, size: size_t): size_t</td> </tr>
+					<tr> <td align="left" >+ close(): void</td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	Writable [
+		shape=plain
+		label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+			<tr> <td> <b>«abstract» Writable</b> </td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" > No fields </td> </tr>
+				</table>
+			</td> </tr>
+			<tr> <td>
+				<table border="0" cellborder="0" cellspacing="0" >
+					<tr> <td align="left" >+ <i>destructor</i>(): void</td> </tr>
+					<tr> <td align="left" ><i>+ write(buffer: char*, size: size_t): void</i></td> </tr>
+					<tr> <td align="left" ><i>+ close(): void</i></td> </tr>
+				</table>
+			</td> </tr>
+				</table>>
+	]
+	ConfigFileReader -> FileStream [arrowhead=vee style=dotted]
+	ConfigFileReader -> BufferedReader [arrowhead=vee style=dotted]
+	IMAPClient -> Socket [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPParser [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPLoginResponse [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPRawResponse [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPSelectResponse [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPSearchResponse [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPFetchResponse [arrowhead=vee style=dotted]
+	IMAPClient -> IMAPLogoutResponse [arrowhead=vee style=dotted]
+	IMAPParser -> Socket [arrowhead=vee style=dotted]
+	IMAPParser -> BufferedReader [arrowhead=vee style=dotted]
+	IMAPParser -> IMAPRawResponse [arrowhead=vee style=dotted]
+	IMAPParser -> IMAPResponseBodyLine [arrowhead=vee style=dotted]
+	IMAPParser -> SafeStringView [arrowhead=vee style=dotted]
+	IMAPResponseBodyLine -> SafeStringView [arrowhead=vee style=dotted]
+	IMAPRawResponse -> SafeStringView [arrowhead=vee style=dotted]
+	IMAPRawResponse -> IMAPResponseBodyLine [arrowhead=vee style=dotted]
+	IMAPResponse -> IMAPRawResponse [arrowhead=vee style=dotted]
+	IMAPResponse -> IMAPLoginResponse [label="inherits" dir=back arrowtail=empty style=solid]
+	IMAPResponse -> IMAPLogoutResponse [label="inherits" dir=back arrowtail=empty style=solid]
+	IMAPResponse -> IMAPSelectResponse [label="inherits" dir=back arrowtail=empty style=solid]
+	IMAPSelectResponse -> IMAPRawResponse [arrowhead=vee style=dotted]
+	IMAPSelectResponse -> IMAPResponseBodyLine [arrowhead=vee style=dotted]
+	IMAPResponse -> IMAPSearchResponse [label="inherits" dir=back arrowtail=empty style=solid]
+	IMAPSearchResponse -> IMAPRawResponse [arrowhead=vee style=dotted]
+	IMAPSearchResponse -> IMAPResponseBodyLine [arrowhead=vee style=dotted]
+	IMAPMessage -> SafeStringView [arrowhead=vee style=dotted]
+	IMAPMessage -> ReadableString [arrowhead=vee style=dotted]
+	IMAPMessage -> BufferedReader [arrowhead=vee style=dotted]
+	IMAPResponse -> IMAPFetchResponse [label="inherits" dir=back arrowtail=empty style=solid]
+	IMAPFetchResponse -> IMAPMessage [arrowhead=vee style=dotted]
+	IMAPFetchResponse -> IMAPRawResponse [arrowhead=vee style=dotted]
+	IMAPFetchResponse -> IMAPResponseBodyLine [arrowhead=vee style=dotted]
+	IMAPFetchResponse -> SafeStringView [arrowhead=vee style=dotted]
+	Writable -> Socket [label="extends" dir=back arrowtail=empty style=dashed]
+	Readable -> Socket [label="extends" dir=back arrowtail=empty style=dashed]
+	Socket -> TCPSocket [label="implements" dir=back arrowtail=empty style=dashed]
+	TCPSocket -> AddressInfo [arrowhead=vee style=dotted]
+	Socket -> TLSSocket [label="implements" dir=back arrowtail=empty style=dashed]
+	TLSSocket -> TCPSocket [arrowhead=vee style=dotted]
+	BufferedReader -> Readable [arrowhead=vee style=dotted]
+	Readable -> FileStream [label="implements" dir=back arrowtail=empty style=dashed]
+	Writable -> FileStream [label="implements" dir=back arrowtail=empty style=dashed]
+	Readable -> ReadableString [label="implements" dir=back arrowtail=empty style=dashed]
+}

@@ -1,0 +1,2265 @@
+[
+	{
+		"name": "ConfigFileReader",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::map<std::string, std::string>",
+				"name": "entries"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "FileStream*",
+				"name": "fileStream"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "BufferedReader*",
+				"name": "bufferedReader"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "ConfigFileReader",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "path"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~ConfigFileReader",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "parse",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"FileStream",
+			"BufferedReader"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "Utils",
+		"fields": [],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": true,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "hashString",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "uint8_t",
+						"name": "hash"
+					},
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "str"
+					},
+					{
+						"isConstant": true,
+						"type": "size_t",
+						"name": "length"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": true,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "std::string",
+				"name": "stringifyBuffer",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "uint8_t*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": true,
+						"type": "size_t",
+						"name": "length"
+					}
+				]
+			}
+		],
+		"inheritance": [],
+		"uses": [],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPClient",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "Socket*",
+				"name": "socket"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "IMAPParser*",
+				"name": "parser"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "int",
+				"name": "tag"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPClient",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "Socket*",
+						"name": "socket"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~IMAPClient",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPLoginResponse*",
+				"name": "login",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "username"
+					},
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "password"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPSelectResponse*",
+				"name": "selectMailbox",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "mailbox"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPSearchResponse*",
+				"name": "search",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "criteria"
+					}
+				]
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPFetchResponse*",
+				"name": "fetch",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "FetchQuery*",
+						"name": "query"
+					}
+				]
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPLogoutResponse*",
+				"name": "logout",
+				"parameters": []
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": true,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "std::string",
+				"name": "escapeString",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "str"
+					}
+				]
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"Socket",
+			"IMAPParser",
+			"IMAPLoginResponse",
+			"IMAPRawResponse",
+			"IMAPSelectResponse",
+			"IMAPSearchResponse",
+			"IMAPFetchResponse",
+			"IMAPLogoutResponse"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPParser",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "Socket*",
+				"name": "socket"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "BufferedReader*",
+				"name": "reader"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::map<uint32_t, IMAPRawResponse*>",
+				"name": "responses"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "bool",
+				"name": "hasConsumedHello"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPParser",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "Socket*",
+						"name": "socket"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~IMAPParser",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPRawResponse*",
+				"name": "waitForResponse",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "uint32_t",
+						"name": "tag"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "IMAPRawResponse*",
+				"name": "handleResponse",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"Socket",
+			"BufferedReader",
+			"IMAPRawResponse",
+			"IMAPResponseBodyLine",
+			"SafeStringView"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "SafeStringView",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::string*",
+				"name": "data"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "start"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "end"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "SafeStringView",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "SafeStringView",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "std::string*",
+						"name": "data"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "start"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "end"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "length",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "std::string_view",
+				"name": "toView",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "std::string",
+				"name": "toString",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPResponseBodyLine",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "Type",
+				"name": "type"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "SafeStringView",
+				"name": "content"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::optional<SafeStringView>",
+				"name": "octetStream"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPResponseBodyLine",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "SafeStringView",
+						"name": "content"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPResponseBodyLine",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "SafeStringView",
+						"name": "content"
+					},
+					{
+						"isConstant": false,
+						"type": "SafeStringView",
+						"name": "octetStream"
+					}
+				]
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "resolveType",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"SafeStringView"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPRawResponse",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "uint32_t",
+				"name": "tag"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "Status",
+				"name": "status"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "SafeStringView",
+				"name": "message"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::vector<IMAPResponseBodyLine>",
+				"name": "bodyLines"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::string*",
+				"name": "raw"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPRawResponse",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~IMAPRawResponse",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "bool",
+				"name": "isOk",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"SafeStringView",
+			"IMAPResponseBodyLine"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPResponse",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "IMAPRawResponse*",
+				"name": "response"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPResponse",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "IMAPRawResponse*",
+						"name": "response"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "bool",
+				"name": "isOk",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"IMAPRawResponse"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPLoginResponse",
+		"fields": [],
+		"methods": [],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "IMAPResponse"
+			}
+		],
+		"uses": [
+			"IMAPResponse"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPLogoutResponse",
+		"fields": [],
+		"methods": [],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "IMAPResponse"
+			}
+		],
+		"uses": [
+			"IMAPResponse"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPSelectResponse",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "uint32_t",
+				"name": "exists"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "uint32_t",
+				"name": "recent"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPSelectResponse",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "IMAPRawResponse*",
+						"name": "response"
+					}
+				]
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "parseBody",
+				"parameters": []
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "IMAPResponse"
+			}
+		],
+		"uses": [
+			"IMAPResponse",
+			"IMAPRawResponse",
+			"IMAPResponseBodyLine"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPSearchResponse",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::vector<uint32_t>",
+				"name": "messageNumbers"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPSearchResponse",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "IMAPRawResponse*",
+						"name": "response"
+					}
+				]
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "parseBody",
+				"parameters": []
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "IMAPResponse"
+			}
+		],
+		"uses": [
+			"IMAPResponse",
+			"IMAPRawResponse",
+			"IMAPResponseBodyLine"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPMessage",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "uint32_t",
+				"name": "id"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "SafeStringView",
+				"name": "content"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::map<std::string, std::string>",
+				"name": "headers"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPMessage",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "parseHeaders",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"SafeStringView",
+			"ReadableString",
+			"BufferedReader"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "IMAPFetchResponse",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "std::vector<IMAPMessage>",
+				"name": "messages"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "IMAPFetchResponse",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "IMAPRawResponse*",
+						"name": "response"
+					}
+				]
+			},
+			{
+				"access": "private",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "parseBody",
+				"parameters": []
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "IMAPResponse"
+			}
+		],
+		"uses": [
+			"IMAPResponse",
+			"IMAPMessage",
+			"IMAPRawResponse",
+			"IMAPResponseBodyLine",
+			"SafeStringView"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "ClientSettings",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "host"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "uint32_t",
+				"name": "port"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "bool",
+				"name": "tls"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "certFile"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "certDir"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "mailbox"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "bool",
+				"name": "headersOnly"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "bool",
+				"name": "recentOnly"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "authFile"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "outDir"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "bool",
+				"name": "validate",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "std::string",
+				"name": "formatDownloadCount",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "count"
+					}
+				]
+			}
+		],
+		"inheritance": [],
+		"uses": [],
+		"isAbstract": false
+	},
+	{
+		"name": "AddressInfo",
+		"fields": [
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "address"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "int",
+				"name": "port"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "Family",
+				"name": "family"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "size"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "struct sockaddr_in",
+				"name": "_address"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "AddressInfo",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "AddressInfo",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "AddressInfo",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "address"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					},
+					{
+						"isConstant": false,
+						"type": "Family",
+						"name": "family"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "AddressInfo",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "struct",
+						"name": "sockaddr_in"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~AddressInfo",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "setAddressInfo",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "address"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					},
+					{
+						"isConstant": false,
+						"type": "Family",
+						"name": "family"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "setAddressInfo",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "struct",
+						"name": "sockaddr_in"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "setAddressInfo",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "in_addr_t",
+						"name": "address"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "setAddressInfo",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "const char*",
+				"name": "getAddress",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "int",
+				"name": "getPort",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "Family",
+				"name": "getFamily",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "getSize",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "struct sockaddr*",
+				"name": "getSocketAddress",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": true,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "AddressInfo*",
+				"name": "resolve",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "hostname"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					},
+					{
+						"isConstant": false,
+						"type": "Family",
+						"name": "family"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "socketType"
+					}
+				]
+			}
+		],
+		"inheritance": [],
+		"uses": [],
+		"isAbstract": false
+	},
+	{
+		"name": "Socket",
+		"fields": [],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": false,
+				"type": null,
+				"name": "~Socket",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": true,
+				"type": "void",
+				"name": "connect",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "hostname"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": true,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Writable"
+			},
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Readable"
+			}
+		],
+		"uses": [
+			"Writable",
+			"Readable"
+		],
+		"isAbstract": true
+	},
+	{
+		"name": "TCPSocket",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "AddressInfo*",
+				"name": "addressInfo"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "int",
+				"name": "fd"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "TCPSocket",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "connect",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "hostname"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "write",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "read",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Socket"
+			}
+		],
+		"uses": [
+			"Socket",
+			"AddressInfo"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "TLSSocket",
+		"fields": [
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "SSL_CTX*",
+				"name": "ctx"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "SSL*",
+				"name": "ssl"
+			},
+			{
+				"access": "public",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "TCPSocket*",
+				"name": "tcpSocket"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "TLSSocket",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "connect",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "hostname"
+					},
+					{
+						"isConstant": false,
+						"type": "int",
+						"name": "port"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "write",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "read",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "setCertificateFile",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "certFile"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "setCertificateDirectory",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "certDir"
+					}
+				]
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Socket"
+			}
+		],
+		"uses": [
+			"Socket",
+			"TCPSocket"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "BufferedReader",
+		"fields": [
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "Readable*",
+				"name": "stream"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "char*",
+				"name": "buffer"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "capacity"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "size"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "position"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "BufferedReader",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "Readable*",
+						"name": "stream"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "capacity"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~BufferedReader",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "int",
+				"name": "readByte",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "readBytes",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "skipBytes",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "ssize_t",
+				"name": "readLine",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			}
+		],
+		"inheritance": [],
+		"uses": [
+			"Readable"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "FileStream",
+		"fields": [
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "FILE*",
+				"name": "file"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "FileStream",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "path"
+					},
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "mode"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "FileStream",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "FILE*",
+						"name": "file"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "~FileStream",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "read",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "write",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": true,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "FileStream",
+				"name": "open",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "path"
+					},
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "mode"
+					}
+				]
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Readable"
+			},
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Writable"
+			}
+		],
+		"uses": [
+			"Readable",
+			"Writable"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "Readable",
+		"fields": [],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": false,
+				"type": null,
+				"name": "~Readable",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": true,
+				"type": "size_t",
+				"name": "read",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": true,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [],
+		"isAbstract": true
+	},
+	{
+		"name": "ReadableString",
+		"fields": [
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": true,
+				"type": "char*",
+				"name": "data"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "size"
+			},
+			{
+				"access": "private",
+				"isStatic": false,
+				"isConstant": false,
+				"type": "size_t",
+				"name": "position"
+			}
+		],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": true,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": null,
+				"name": "ReadableString",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "data"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "int",
+				"name": "readByte",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "size_t",
+				"name": "read",
+				"parameters": [
+					{
+						"isConstant": false,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": false,
+				"isAbstract": false,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			}
+		],
+		"inheritance": [
+			{
+				"isVirtual": false,
+				"access": "public",
+				"baseClass": "Readable"
+			}
+		],
+		"uses": [
+			"Readable"
+		],
+		"isAbstract": false
+	},
+	{
+		"name": "Writable",
+		"fields": [],
+		"methods": [
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": true,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": false,
+				"type": null,
+				"name": "~Writable",
+				"parameters": []
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": true,
+				"type": "void",
+				"name": "write",
+				"parameters": [
+					{
+						"isConstant": true,
+						"type": "char*",
+						"name": "buffer"
+					},
+					{
+						"isConstant": false,
+						"type": "size_t",
+						"name": "size"
+					}
+				]
+			},
+			{
+				"access": "public",
+				"isConstructor": false,
+				"isDestructor": false,
+				"isStatic": false,
+				"isVirtual": true,
+				"isAbstract": true,
+				"type": "void",
+				"name": "close",
+				"parameters": []
+			}
+		],
+		"inheritance": [],
+		"uses": [],
+		"isAbstract": true
+	}
+]
